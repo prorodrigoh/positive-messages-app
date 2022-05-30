@@ -22,7 +22,6 @@ export default function Home ( {navigation} ) {
             .catch(console.error)
     },[vibesUpdated])
 
-    console.log(allVibes)
     return (
     //  <ImageBackground 
     //       source={bkgimg}
@@ -32,8 +31,8 @@ export default function Home ( {navigation} ) {
             {!allVibes
                 ? <ActivityIndicator size='large' color='Orange' />
                 : allVibes.map( vibe => (
-                    // <TouchableOpacity key={vibe.id} onPress={() => navigation.navigate('AddNew')}>
-                        <View>
+                    // <TouchableOpacity  onPress={() => navigation.navigate('AddNew')}>
+                        <View key={vibe.id}>
                             <Text style={styles.text}>{vibe.message}</Text>
                         </View>
                     // </TouchableOpacity>
