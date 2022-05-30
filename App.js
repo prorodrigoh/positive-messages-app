@@ -1,20 +1,33 @@
+import { createContext, useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// import { ImageBackground } from 'react-native';
+// import {styles} from './src/styles'
+import Home from './src/scenes/Home.js';
+import AddNew from './src/scenes/AddNew.js';
+// import bkgimg from './assets/good-vibes-bkg.jpeg'
+
+const Stack = createNativeStackNavigator()
+export const NewVibeContext = createContext(null)
+
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  const [vibesUpdated, setVibesUpdated] = useState()
+  
+  return (
+<>
+    <NewVibeContext.Provider value={{vibesUpdated, setVibesUpdated}}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name='Home' component={Home} options={{ title: 'Good Vibes'}}/>
+            <Stack.Screen name='AddNew' component={AddNew} options={{ title: 'Add Good Vibe'}}/>
+          </Stack.Navigator>
+          <StatusBar style="auto" />
+        </NavigationContainer>
+    </NewVibeContext.Provider>
+</>
+  );
+
+}
